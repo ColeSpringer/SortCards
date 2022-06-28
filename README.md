@@ -1,1 +1,1 @@
-Sorts cards. Hopefully :)
+Sorts cards.
