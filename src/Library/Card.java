@@ -1,3 +1,4 @@
+package Library;
 
 import java.util.Objects;
 
@@ -7,12 +8,8 @@ public class Card implements Comparable<Card> {
     private Suit suit;
 
     public Card(int value, Suit suit) {
-        if (value < 2 || value > 14) {
-            throw new IllegalArgumentException("Card value must be in range 2...14.");
-        }else{
-            this.value = value;
-            this.suit = suit;
-        }
+        this.value = value;
+        this.suit = suit;
     }
 
     @Override

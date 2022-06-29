@@ -1,4 +1,9 @@
+package UI;
+
 import java.util.Scanner;
+import Library.Card;
+import Library.Hand;
+import Library.Suit;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -34,15 +39,22 @@ public class UserInterface {
                     if(input.equals("")){
                         break;
                     }
-                    String[] valueSuit = input.split(",");
-                    int value = Integer.valueOf(valueSuit[0]);
-                    Suit suit = determineSuit(valueSuit[1]);
+                    Suit suit;
+                    int value;
+                    try{
+                        String[] valueSuit = input.split(",");
+                        suit = determineSuit(valueSuit[1]);
+                        value = Integer.valueOf(valueSuit[0]);
+                    }catch(Exception e){
+                        System.out.println("Make sure input is in valid format of value,suit");
+                        continue;
+                    }
                     if(value < 2 || value > 14 || suit == null){
                         System.out.println("Please try again. Needs to be entered in the format of value,suit");
                     }else{
                         Card card = new Card(value, suit);
                         if(this.hand.getHand().contains(card)){
-                            System.out.println("Enter new card. Card can not one you have already entered.");
+                            System.out.println("Enter new card. Card can not be one you have already entered.");
                         }else{
                             hand.add(card);
                         }
@@ -53,7 +65,12 @@ public class UserInterface {
                 System.out.println("Enter the number of cards you would like to sort in range 1-52:");
                 int numCards;
                 while(true){
-                    numCards = Integer.valueOf(this.scanner.nextLine());
+                    try{
+                        numCards = Integer.valueOf(this.scanner.nextLine());
+                    }catch(Exception e){
+                        System.out.println("Please try again. Input should be between 1-52");
+                        continue;
+                    }
                     if(numCards < 1 || numCards > 52){
                         System.out.println("Please enter a positive integer in range 1-52");
                     }else{
